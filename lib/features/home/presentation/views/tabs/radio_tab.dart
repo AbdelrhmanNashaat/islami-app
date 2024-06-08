@@ -6,8 +6,20 @@ import 'package:islami_app/image_path.dart';
 
 import '../widgets/icon_button.dart';
 
-class RadioTab extends StatelessWidget {
+class RadioTab extends StatefulWidget {
   const RadioTab({super.key});
+
+  @override
+  State<RadioTab> createState() => _RadioTabState();
+}
+
+class _RadioTabState extends State<RadioTab> {
+  final player = AudioPlayer();
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +43,22 @@ class RadioTab extends StatelessWidget {
               IconButtonWidget(
                 imagePath: AssetsData.radioLeft,
                 onPressed: () {
-                  final player = AudioPlayer();
+                  player.stop();
                   player.play(AssetSource('audio/055.mp3'));
                 },
               ),
               IconButtonWidget(
                 imagePath: AssetsData.radioPlay,
                 onPressed: () {
-                  final player = AudioPlayer();
-                  player.play(AssetSource('audio/071.mp3'));
+                  player.play(
+                    AssetSource('audio/071.mp3'),
+                  );
                 },
               ),
               IconButtonWidget(
                 imagePath: AssetsData.radioRight,
                 onPressed: () {
-                  final player = AudioPlayer();
+                  player.stop();
                   player.play(AssetSource('audio/074.mp3'));
                 },
               ),
